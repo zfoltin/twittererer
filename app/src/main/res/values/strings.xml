@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Twittererer</string>
+    <string name="error_login_failed">Login failed. Please try again!</string>
+    <string name="title_activity_twitter_feed">My Twitter Feed</string>
+</resources>
