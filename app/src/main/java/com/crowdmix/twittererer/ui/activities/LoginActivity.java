@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void success(Result<TwitterSession> result) {
                 startActivity(new Intent(LoginActivity.this, TimelineActivity.class));
+                finish();
             }
 
             @Override

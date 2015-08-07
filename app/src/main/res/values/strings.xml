@@ -2,4 +2,7 @@
     <string name="app_name">Twittererer</string>
     <string name="error_login_failed">Login failed. Please try again!</string>
     <string name="title_activity_twitter_feed">My Twitter Feed</string>
+    <string name="label_welcome_message">Welcome to Twittererer!</string>
+    <string name="label_tag_line">Please log in with your Twitter account</string>
+    <string name="content_description_avatar">avatar image</string>
 </resources>

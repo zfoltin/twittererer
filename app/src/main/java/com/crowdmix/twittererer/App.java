@@ -7,6 +7,8 @@ import com.crowdmix.twittererer.services.TwitterService;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -30,6 +32,8 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        JodaTimeAndroid.init(this);
 
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Crashlytics(), new Twitter(authConfig));

@@ -12,6 +12,14 @@ import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.models.Tweet;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+import org.joda.time.Seconds;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,9 +46,25 @@ public class TwitterService extends TwitterApiClient {
                     List<TimelineItem> timelineItems = new ArrayList<>();
                     for (Tweet t : result.data) {
                         User u = new User(t.user.name, t.user.screenName, t.user.profileImageUrl);
-                        timelineItems.add(new TimelineItem(t.createdAt, t.text, u));
+                        timelineItems.add(new TimelineItem(convertToAge(t.createdAt), t.text, u));
                     }
                     return timelineItems;
+                }
+
+                private String convertToAge(String createdAt) {
+                    DateTimeFormatter dtf = DateTimeFormat.forPattern("EEE MMM dd kk:mm:ss Z yyyy");
+                    DateTime created = dtf.parseDateTime(createdAt);
+                    DateTime now = new DateTime();
+
+                    if (Seconds.secondsBetween(created, now).getSeconds() < 60) {
+                        return Seconds.secondsBetween(created, now).getSeconds() + "s";
+                    } else if (Minutes.minutesBetween(created, now).getMinutes() < 60) {
+                        return Minutes.minutesBetween(created, new DateTime()).getMinutes() + "m";
+                    } else if (Hours.hoursBetween(created, now).getHours() < 24) {
+                        return Hours.hoursBetween(created, now).getHours() + "h";
+                    } else {
+                        return Days.daysBetween(created, now).getDays() + "d";
+                    }
                 }
 
                 @Override
