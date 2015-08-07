@@ -17,3 +17,33 @@
 #}
 
 -include ../proguard-com.twitter.sdk.android.twitter.txt
+
+# model classes
+-keep class com.crowdmix.twittererer.models.** { *; }
+
+# butterknife
+-keep class butterknife.** { *; }
+-dontwarn butterknife.internal.**
+-keep class **$$ViewInjector { *; }
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <fields>;
+}
+
+-keepclasseswithmembernames class * {
+    @butterknife.* <methods>;
+}
+
+# retrofit
+-dontwarn retrofit.**
+-keep class retrofit.** { *; }
+-keepattributes *Annotation*,Signature,Exceptions
+
+# okio
+-dontwarn okio.**
+
+# retrolambda
+-dontwarn java.lang.invoke**
+
+# RxJava
+-dontwarn rx.internal.util.**
