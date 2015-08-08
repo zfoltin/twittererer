@@ -1,6 +1,7 @@
 package com.crowdmix.twittererer.ui.activities;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +26,8 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     @Inject
     TimelinePresenter presenter;
 
+    @Bind(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
     @Bind(R.id.tweets)
     RecyclerView tweetList;
 
@@ -44,6 +47,9 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
 
         initTweetList();
 
+        swipeRefresh.setColorSchemeResources(R.color.brand_blue, R.color.dark_blue);
+        swipeRefresh.setOnRefreshListener(presenter::refreshTweets);
+
         presenter.initialise(this);
     }
 
@@ -60,5 +66,6 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     @Override
     public void showTimeline(List<TimelineItem> timelineItems) {
         adapter.setItems(timelineItems);
+        swipeRefresh.setRefreshing(false);
     }
 }

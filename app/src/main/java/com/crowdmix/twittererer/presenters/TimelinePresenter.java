@@ -23,9 +23,12 @@ public class TimelinePresenter {
 
     public void initialise(TimelineView view) {
         this.view = new WeakReference<>(view);
+        refreshTweets();
+    }
 
+    public void refreshTweets() {
         service.getTimelineItems()
                 .observeOn(scheduler)
-                .subscribe(view::showTimeline);
+                .subscribe(view.get()::showTimeline);
     }
 }

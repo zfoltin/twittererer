@@ -9,10 +9,15 @@
         android:id="@+id/ab_toolbar"
         layout="@layout/toolbar" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/tweets"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ab_toolbar" />
+        android:layout_below="@id/ab_toolbar">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/tweets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>
