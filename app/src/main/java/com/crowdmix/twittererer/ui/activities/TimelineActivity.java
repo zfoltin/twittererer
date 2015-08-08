@@ -1,11 +1,17 @@
 package com.crowdmix.twittererer.ui.activities;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.support.annotation.StringRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.crowdmix.twittererer.App;
 import com.crowdmix.twittererer.R;
@@ -64,8 +70,42 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_timeline, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_tweet) {
+            showNewTweetDialog();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showNewTweetDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText tweetText = new EditText(this);
+
+        builder.setMessage(R.string.label_what_is_happening);
+        builder.setPositiveButton(R.string.action_tweet, (dialog, which) -> {
+            presenter.tweet(tweetText.getText().toString());
+        });
+
+        AlertDialog alert = builder.create();
+        alert.setView(tweetText, 64, 0, 64, 0);
+        alert.show();
+    }
+
+    @Override
     public void showTimeline(List<TimelineItem> timelineItems) {
         adapter.setItems(timelineItems);
         swipeRefresh.setRefreshing(false);
+    }
+
+    @Override
+    public void showMessage(@StringRes int messageResId) {
+        Toast.makeText(this, messageResId, Toast.LENGTH_LONG).show();
     }
 }
