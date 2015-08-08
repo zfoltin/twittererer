@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activities.TimelineActivity"
-    android:background="@android:color/white">
+    android:background="@color/white"
+    tools:context=".ui.activities.TimelineActivity">
 
     <include
         android:id="@+id/ab_toolbar"
@@ -13,6 +13,6 @@
         android:id="@+id/tweets"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ab_toolbar"/>
+        android:layout_below="@id/ab_toolbar" />
 
 </RelativeLayout>

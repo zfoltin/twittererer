@@ -3,4 +3,6 @@
     <color name="brand_blue">#0084b4</color>
     <color name="dark_blue">#3b5998</color>
     <color name="white">#eee</color>
+    <color name="grey">#ddd</color>
+    <color name="dark_grey">#aaa</color>
 </resources>

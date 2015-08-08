@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.crowdmix.twittererer.App;
 import com.crowdmix.twittererer.R;
@@ -27,7 +26,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     TimelinePresenter presenter;
 
     @Bind(R.id.tweets)
-    RecyclerView tweetsList;
+    RecyclerView tweetList;
 
     TimelineAdapter adapter;
 
@@ -36,29 +35,26 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
-        ActivityComponent component = DaggerActivityComponent.builder()
+        DaggerActivityComponent.builder()
                 .applicationComponent(App.component())
-                .build();
+                .build()
+                .inject(this);
 
-        component.inject(this);
+        setSupportActionBar((Toolbar) findViewById(R.id.ab_toolbar));
 
-        setupToolbar();
-
-        ButterKnife.bind(this);
-
-        adapter = new TimelineAdapter();
-        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        tweetsList.setLayoutManager(lm);
-        tweetsList.setAdapter(adapter);
+        initTweetList();
 
         presenter.initialise(this);
     }
 
+    private void initTweetList() {
+        ButterKnife.bind(this);
 
-    private void setupToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.ab_toolbar);
-        toolbar.setVisibility(View.VISIBLE);
-        setSupportActionBar(toolbar);
+        LinearLayoutManager lm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        tweetList.setLayoutManager(lm);
+
+        adapter = new TimelineAdapter();
+        tweetList.setAdapter(adapter);
     }
 
     @Override

@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/tag_line"
         android:textAppearance="@android:style/TextAppearance.Large"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/large_spacing"
         android:text="@string/label_welcome_message" />
 
     <TextView
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/twitter_login_button"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="@dimen/largest_spacing"
         android:text="@string/label_tag_line" />
 
     <com.twitter.sdk.android.core.identity.TwitterLoginButton

@@ -17,4 +17,25 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="NormalText">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/normal_text_size</item>
+    </style>
+
+    <style name="NormalText.Light">
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="NormalText.Light.Right">
+        <item name="android:gravity">end</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
+    <style name="SmallPaddedText" parent="NormalText.Light">
+        <item name="android:textSize">@dimen/small_text_size</item>
+        <item name="android:paddingLeft">@dimen/small_spacing</item>
+        <item name="android:paddingRight">@dimen/small_spacing</item>
+        <item name="android:textColor">@color/dark_grey</item>
+    </style>
+
 </resources>

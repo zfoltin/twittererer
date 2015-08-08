@@ -1,6 +1,7 @@
 package com.crowdmix.twittererer.presenters;
 
 import com.crowdmix.twittererer.models.TimelineItem;
+import com.crowdmix.twittererer.models.User;
 import com.crowdmix.twittererer.services.TwitterService;
 import com.crowdmix.twittererer.views.TimelineView;
 
@@ -21,7 +22,7 @@ import static org.mockito.Mockito.when;
 public class TimelinePresenterTest {
 
     @Mock
-    TwitterService service;
+    TwitterService twitterService;
     @Mock
     TimelineView mockView;
 
@@ -31,15 +32,15 @@ public class TimelinePresenterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        presenter = new TimelinePresenter(service, Schedulers.immediate());
+        presenter = new TimelinePresenter(twitterService, Schedulers.immediate());
     }
 
     @Test
     public void initialiseLoadsTimelineData() {
         List<TimelineItem> timelineItems = new ArrayList<>();
-        timelineItems.add(new TimelineItem("", "", null));
+        timelineItems.add(new TimelineItem("", "", new User("Bob", "bob", "")));
 
-        when(service.getTimelineItems()).thenReturn(Observable.just(timelineItems));
+        when(twitterService.getTimelineItems()).thenReturn(Observable.just(timelineItems));
 
         presenter.initialise(mockView);
 

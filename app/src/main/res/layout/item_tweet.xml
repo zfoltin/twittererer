@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,15 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/normal_spacing"
-        android:paddingLeft="@dimen/normal_spacing"
-        android:paddingRight="@dimen/large_spacing"
-        android:paddingTop="@dimen/normal_spacing">
+        android:padding="@dimen/normal_spacing">
 
         <ImageView
             android:id="@+id/avatar"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/avatar_size"
+            android:layout_height="@dimen/avatar_size"
             android:layout_marginTop="@dimen/small_spacing"
             android:contentDescription="@string/content_description_avatar" />
 
@@ -36,46 +32,37 @@
 
                 <TextView
                     android:id="@+id/name"
+                    style="@style/NormalText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp"
                     tools:text="Bob Smith" />
 
                 <TextView
                     android:id="@+id/handle"
+                    style="@style/SmallPaddedText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:paddingLeft="@dimen/small_spacing"
-                    android:paddingRight="@dimen/small_spacing"
-                    android:textAppearance="@android:style/TextAppearance.Small"
-                    android:textSize="12sp"
                     tools:text="\@bob" />
 
                 <TextView
                     android:id="@+id/time"
+                    style="@style/NormalText.Light.Right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:gravity="end"
-                    android:textSize="14sp"
                     tools:text="9m" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/text"
+                style="@style/NormalText.Light"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="sans-serif-light"
-                android:textColor="@android:color/black"
-                android:textSize="14sp"
-                tools:text="Some tweet text will go here. Sometimes a long one, up to 140 characters you know..." />
+                tools:text="Some random text goes here. Sometimes even a long one, up to 140 characters, you know... So to see how that looks, I'll just put this here.." />
         </LinearLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#ddd" />
+        android:background="@color/grey" />
 </LinearLayout>
