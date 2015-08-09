@@ -40,8 +40,11 @@ public class TimelinePresenter {
                 .observeOn(scheduler)
                 .subscribe(timelineItems -> {
                     this.timelineItems = timelineItems;
-                    // TODO: show some message on the view when there are 0 tweets, e.g.: "Tweet, buddy, tweet!"
-                    view.get().showTimeline(timelineItems);
+                    if (timelineItems.size() > 0) {
+                        view.get().showTimeline(timelineItems);
+                    } else {
+                        view.get().showNoTweets();
+                    }
                 });
     }
 
@@ -49,8 +52,8 @@ public class TimelinePresenter {
         timelineItems.add(0, new TimelineItem("0s", tweetText, service.getCurrentUser()));
         view.get().showTimeline(timelineItems);
         service.sendTweet(tweetText)
-            .observeOn(scheduler)
-            .subscribe(x -> view.get().showMessage(R.string.alert_tweet_successful),
-                    e -> view.get().showMessage(R.string.alert_tweet_failed));
+                .observeOn(scheduler)
+                .subscribe(x -> view.get().showMessage(R.string.alert_tweet_successful),
+                        e -> view.get().showMessage(R.string.alert_tweet_failed));
     }
 }

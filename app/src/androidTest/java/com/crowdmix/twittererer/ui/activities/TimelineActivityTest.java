@@ -35,10 +35,10 @@ import static org.mockito.Mockito.when;
 
 /**
  * UI tests using Espresso
- *
+ * <p>
  * I prefer to use a test environment whenever I can, instead of mocking the API.
  * In case of Twitter the API calls have to be mocked.
- *
+ * <p>
  * Another difficulty is that log in with Twitter cannot be done with Espresso
  */
 @RunWith(AndroidJUnit4.class)
@@ -53,7 +53,7 @@ public class TimelineActivityTest {
             super.beforeActivityLaunched();
 
             App.BaseApplicationComponent component = DaggerMockApplicationComponent.builder()
-                    .mockApplicationModule(new MockApplicationModule((App)InstrumentationRegistry.getTargetContext().getApplicationContext()))
+                    .mockApplicationModule(new MockApplicationModule((App) InstrumentationRegistry.getTargetContext().getApplicationContext()))
                     .build();
             App.overrideComponent(component);
 
@@ -70,7 +70,7 @@ public class TimelineActivityTest {
     };
 
     @Test
-    public void canSeeTimeline() {
+    public void canSeeTimelineWhenThereAreTweets() {
         onView(withText(R.string.title_activity_twitter_feed))
                 .check(matches(isDisplayed()));
 
@@ -105,6 +105,20 @@ public class TimelineActivityTest {
         onView(withText("5s"))
                 .check(matches(isDisplayed()));
         onView(withText("boo"))
+                .check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void seeNoTweetsMessageWhenThereAreNoTweets() {
+        onView(withText(R.string.title_activity_twitter_feed))
+                .check(matches(isDisplayed()));
+
+        timelineItems.clear();
+
+        onView(withId(R.id.swipe_refresh))
+                .perform(swipeDown());
+
+        onView(withText(R.string.label_no_tweets))
                 .check(matches(isDisplayed()));
     }
 

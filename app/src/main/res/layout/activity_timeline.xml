@@ -20,4 +20,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/no_tweets"
+        style="@style/NormalText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ab_toolbar"
+        android:layout_margin="@dimen/large_spacing"
+        android:gravity="center_horizontal"
+        android:text="@string/label_no_tweets"
+        android:visibility="gone"
+        tools:visibility="visible" />
 </RelativeLayout>

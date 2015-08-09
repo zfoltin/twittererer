@@ -13,8 +13,10 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.crowdmix.twittererer.App;
@@ -40,6 +42,8 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     SwipeRefreshLayout swipeRefresh;
     @Bind(R.id.tweets)
     RecyclerView tweetList;
+    @Bind(R.id.no_tweets)
+    TextView noTweetsView;
 
     TimelineAdapter adapter;
 
@@ -89,7 +93,6 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     }
 
     private void showNewTweetDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText tweetText = new EditText(this);
         tweetText.setId(R.id.tw__tweet_text);
         tweetText.setSingleLine();
@@ -97,6 +100,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
         tweetText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(140)});
         tweetText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.label_what_is_happening);
         builder.setPositiveButton(R.string.action_tweet, (dialog, which) -> {
             presenter.tweet(tweetText.getText().toString());
@@ -117,7 +121,18 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
 
     @Override
     public void showTimeline(List<TimelineItem> timelineItems) {
+        swipeRefresh.setVisibility(View.VISIBLE);
+        tweetList.setVisibility(View.VISIBLE);
+        noTweetsView.setVisibility(View.GONE);
         adapter.setItems(timelineItems);
+        swipeRefresh.setRefreshing(false);
+    }
+
+    @Override
+    public void showNoTweets() {
+        swipeRefresh.setVisibility(View.GONE);
+        tweetList.setVisibility(View.GONE);
+        noTweetsView.setVisibility(View.VISIBLE);
         swipeRefresh.setRefreshing(false);
     }
 

@@ -67,6 +67,13 @@ public class TimelinePresenterTest {
     }
 
     @Test
+    public void initialiseShowNoTweets() {
+        timelineItems.clear();
+        presenter.initialise(mockView);
+        verify(mockView).showNoTweets();
+    }
+
+    @Test
     public void tweetAddsToTimeline() {
         when(twitterService.sendTweet("hello")).thenReturn(Observable.just(true));
         presenter.initialise(mockView);

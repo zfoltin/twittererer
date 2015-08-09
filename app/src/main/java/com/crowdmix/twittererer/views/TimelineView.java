@@ -10,5 +10,7 @@ public interface TimelineView {
 
     void showTimeline(List<TimelineItem> timelineItems);
 
+    void showNoTweets();
+
     void showMessage(@StringRes int messageResId);
 }

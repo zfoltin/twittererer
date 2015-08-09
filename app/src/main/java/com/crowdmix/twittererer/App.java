@@ -39,11 +39,9 @@ public class App extends Application {
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Crashlytics(), new Twitter(authConfig));
 
-        if (applicationComponent == null) {
-            applicationComponent = DaggerApp_ApplicationComponent.builder()
-                    .applicationModule(new ApplicationModule(this, Twitter.getSessionManager().getActiveSession()))
-                    .build();
-        }
+        applicationComponent = DaggerApp_ApplicationComponent.builder()
+                .applicationModule(new ApplicationModule(this))
+                .build();
     }
 
     @VisibleForTesting
