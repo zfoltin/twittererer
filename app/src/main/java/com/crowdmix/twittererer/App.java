@@ -1,6 +1,7 @@
 package com.crowdmix.twittererer;
 
 import android.app.Application;
+import android.support.annotation.VisibleForTesting;
 
 import com.crashlytics.android.Crashlytics;
 import com.crowdmix.twittererer.services.TwitterService;
@@ -23,9 +24,9 @@ public class App extends Application {
     @SuppressWarnings("SpellCheckingInspection")
     public static final String TWITTER_SECRET = "MeliZLYavlMiyhYTs97zyTCUOzznnog9cIrgfRHfc0TbN9PkP4";
 
-    private static ApplicationComponent applicationComponent;
+    private static BaseApplicationComponent applicationComponent;
 
-    public static ApplicationComponent component() {
+    public static BaseApplicationComponent component() {
         return applicationComponent;
     }
 
@@ -38,14 +39,24 @@ public class App extends Application {
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Crashlytics(), new Twitter(authConfig));
 
-        applicationComponent = DaggerApp_ApplicationComponent.builder()
-                .applicationModule(new ApplicationModule(this, Twitter.getSessionManager().getActiveSession()))
-                .build();
+        if (applicationComponent == null) {
+            applicationComponent = DaggerApp_ApplicationComponent.builder()
+                    .applicationModule(new ApplicationModule(this, Twitter.getSessionManager().getActiveSession()))
+                    .build();
+        }
+    }
+
+    @VisibleForTesting
+    public static void overrideComponent(BaseApplicationComponent component) {
+        applicationComponent = component;
     }
 
     @Singleton
     @Component(modules = {ApplicationModule.class})
-    public interface ApplicationComponent {
+    public interface ApplicationComponent extends BaseApplicationComponent {
+    }
+
+    public interface BaseApplicationComponent {
 
         Application application();
 

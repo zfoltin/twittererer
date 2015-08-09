@@ -15,10 +15,13 @@ import com.twitter.sdk.android.core.models.User;
 
 import java.util.List;
 
+import javax.inject.Singleton;
+
 import lombok.Getter;
 import lombok.Setter;
 import rx.Observable;
 
+@Singleton
 public class TwitterService extends TwitterApiClient {
 
     private static final String TAG = TwitterService.class.getSimpleName();
@@ -47,7 +50,7 @@ public class TwitterService extends TwitterApiClient {
                 }
             };
 
-            Twitter.getApiClient().getStatusesService().homeTimeline(null, null, null, null, null, null, null, callback);
+            getStatusesService().homeTimeline(null, null, null, null, null, null, null, callback);
         });
     }
 
@@ -87,7 +90,7 @@ public class TwitterService extends TwitterApiClient {
                 }
             };
 
-            Twitter.getApiClient().getStatusesService().update(tweetText, null, null, null, null, null, null, null, callback);
+            getStatusesService().update(tweetText, null, null, null, null, null, null, null, callback);
         });
     }
 }

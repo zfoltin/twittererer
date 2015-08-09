@@ -40,6 +40,7 @@ public class TimelinePresenter {
                 .observeOn(scheduler)
                 .subscribe(timelineItems -> {
                     this.timelineItems = timelineItems;
+                    // TODO: show some message on the view when there are 0 tweets, e.g.: "Tweet, buddy, tweet!"
                     view.get().showTimeline(timelineItems);
                 });
     }

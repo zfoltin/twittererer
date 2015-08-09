@@ -1,6 +1,7 @@
 package com.crowdmix.twittererer.ui.activities;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -8,8 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -45,7 +49,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
         setContentView(R.layout.activity_timeline);
 
         DaggerActivityComponent.builder()
-                .applicationComponent(App.component())
+                .baseApplicationComponent(App.component())
                 .build()
                 .inject(this);
 
@@ -87,6 +91,11 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     private void showNewTweetDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final EditText tweetText = new EditText(this);
+        tweetText.setId(R.id.tw__tweet_text);
+        tweetText.setSingleLine();
+        tweetText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        tweetText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(140)});
+        tweetText.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         builder.setMessage(R.string.label_what_is_happening);
         builder.setPositiveButton(R.string.action_tweet, (dialog, which) -> {
@@ -96,6 +105,14 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
         AlertDialog alert = builder.create();
         alert.setView(tweetText, 64, 0, 64, 0);
         alert.show();
+
+        tweetText.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                alert.getButton(DialogInterface.BUTTON_POSITIVE).callOnClick();
+                return true;
+            }
+            return false;
+        });
     }
 
     @Override
