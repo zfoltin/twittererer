@@ -46,7 +46,7 @@ public class TimelineConverterTest {
         List<Tweet> tweets = new ArrayList<>();
         tweets.add(createTweet(null, null, "Bob", "bob", "http://some-cloud.com/image_of_bob.png"));
 
-        List<TimelineItem> results = TimelineConverter.fromTweets(tweets);
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, DateTime.now());
 
         assertThat(results, is(notNullValue()));
         assertThat(results.size(), is(1));
@@ -63,51 +63,55 @@ public class TimelineConverterTest {
         List<Tweet> tweets = new ArrayList<>();
         tweets.add(createTweet(null, "tweet text", null, null, null));
 
-        List<TimelineItem> results = TimelineConverter.fromTweets(tweets);
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, DateTime.now());
 
         assertThat(results.get(0).getText(), is(equalTo("tweet text")));
     }
 
     @Test
     public void fromTweetsMapAgeSeconds() {
-        DateTime tenSecondsAgo = new DateTime().minusSeconds(10);
+        DateTime now = DateTime.now();
+        DateTime tenSecondsAgo = now.minusSeconds(10);
         List<Tweet> tweets = new ArrayList<>();
         tweets.add(createTweet(dtf.print(tenSecondsAgo), null, null, null, null));
 
-        List<TimelineItem> results = TimelineConverter.fromTweets(tweets);
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, now);
 
         assertThat(results.get(0).getCreatedAt(), is(equalTo("10s")));
     }
 
     @Test
     public void fromTweetsMapAgeMinutes() {
-        DateTime sixMinutesAgo = new DateTime().minusMinutes(6);
+        DateTime now = DateTime.now();
+        DateTime sixMinutesAgo = now.minusMinutes(6);
         List<Tweet> tweets = new ArrayList<>();
         tweets.add(createTweet(dtf.print(sixMinutesAgo), null, null, null, null));
 
-        List<TimelineItem> results = TimelineConverter.fromTweets(tweets);
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, now);
 
         assertThat(results.get(0).getCreatedAt(), is(equalTo("6m")));
     }
 
     @Test
     public void fromTweetsMapAgeHours() {
-        DateTime twoHoursAgo = new DateTime().minusHours(2);
+        DateTime now = DateTime.now();
+        DateTime twoHoursAgo = now.minusHours(2);
         List<Tweet> tweets = new ArrayList<>();
         tweets.add(createTweet(dtf.print(twoHoursAgo), null, null, null, null));
 
-        List<TimelineItem> results = TimelineConverter.fromTweets(tweets);
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, now);
 
         assertThat(results.get(0).getCreatedAt(), is(equalTo("2h")));
     }
 
     @Test
     public void fromTweetsMapAgeDays() {
-        DateTime fourDaysAgo = new DateTime().minusDays(4);
+        DateTime now = DateTime.now();
+        DateTime fourDaysAgo = now.minusDays(4);
         List<Tweet> tweets = new ArrayList<>();
         tweets.add(createTweet(dtf.print(fourDaysAgo), null, null, null, null));
 
-        List<TimelineItem> results = TimelineConverter.fromTweets(tweets);
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, now);
 
         assertThat(results.get(0).getCreatedAt(), is(equalTo("4d")));
     }

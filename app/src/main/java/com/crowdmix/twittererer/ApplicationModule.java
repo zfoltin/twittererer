@@ -3,6 +3,7 @@ package com.crowdmix.twittererer;
 import android.app.Application;
 
 import com.crowdmix.twittererer.services.TwitterService;
+import com.crowdmix.twittererer.services.TwitterServiceImpl;
 import com.twitter.sdk.android.Twitter;
 
 import javax.inject.Singleton;
@@ -30,7 +31,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     TwitterService provideTwitterService() {
-        return new TwitterService(Twitter.getSessionManager().getActiveSession());
+        return new TwitterServiceImpl(Twitter.getSessionManager().getActiveSession());
     }
 
     @Provides

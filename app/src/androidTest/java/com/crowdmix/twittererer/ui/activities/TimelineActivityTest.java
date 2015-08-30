@@ -44,7 +44,7 @@ import static org.mockito.Mockito.when;
 @RunWith(AndroidJUnit4.class)
 public class TimelineActivityTest {
 
-    List<TimelineItem> timelineItems;
+    private List<TimelineItem> timelineItems;
 
     @Rule
     public ActivityTestRule<TimelineActivity> activityTestRule = new ActivityTestRule<TimelineActivity>(TimelineActivity.class) {
@@ -91,6 +91,7 @@ public class TimelineActivityTest {
         onView(withText("Richie Rich"))
                 .check(doesNotExist());
 
+        //noinspection SpellCheckingInspection
         timelineItems.add(new TimelineItem("5s", "boo", new User("Richie Rich", "richie-rich", "http://ia.media-imdb.com/images/M/MV5BMTA4NjI0NzE2NjNeQTJeQWpwZ15BbWU4MDU0NzMwNjQx._V1_SY317_CR6,0,214,317_AL_.jpg")));
 
         onView(withId(R.id.swipe_refresh))

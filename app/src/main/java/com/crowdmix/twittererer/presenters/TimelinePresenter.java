@@ -40,10 +40,13 @@ public class TimelinePresenter {
                 .observeOn(scheduler)
                 .subscribe(timelineItems -> {
                     this.timelineItems = timelineItems;
-                    if (timelineItems.size() > 0) {
-                        view.get().showTimeline(timelineItems);
-                    } else {
-                        view.get().showNoTweets();
+                    TimelineView view = this.view.get();
+                    if (view != null) {
+                        if (timelineItems.size() > 0) {
+                            view.showTimeline(timelineItems);
+                        } else {
+                            view.showNoTweets();
+                        }
                     }
                 });
     }
@@ -53,7 +56,18 @@ public class TimelinePresenter {
         view.get().showTimeline(timelineItems);
         service.sendTweet(tweetText)
                 .observeOn(scheduler)
-                .subscribe(x -> view.get().showMessage(R.string.alert_tweet_successful),
-                        e -> view.get().showMessage(R.string.alert_tweet_failed));
+                .subscribe(
+                        x -> {
+                            TimelineView view = this.view.get();
+                            if (view != null) {
+                                view.showMessage(R.string.alert_tweet_successful);
+                            }
+                        },
+                        e -> {
+                            TimelineView view = this.view.get();
+                            if (view != null) {
+                                view.showMessage(R.string.alert_tweet_failed);
+                            }
+                        });
     }
 }
