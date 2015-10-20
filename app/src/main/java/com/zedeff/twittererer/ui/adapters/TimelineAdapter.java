@@ -59,9 +59,9 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         TextView nameView;
         @Bind(R.id.handle)
         TextView handleView;
-        @Bind(R.id.time)
+        @Bind(R.id.tweet_time)
         TextView timeView;
-        @Bind(R.id.text)
+        @Bind(R.id.tweet_text)
         TextView textView;
 
         public ViewHolder(View itemView) {

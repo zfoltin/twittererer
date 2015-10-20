@@ -45,7 +45,7 @@
                     tools:text="\@bob" />
 
                 <TextView
-                    android:id="@+id/time"
+                    android:id="@+id/tweet_time"
                     style="@style/NormalText.Light.Right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/text"
+                android:id="@+id/tweet_text"
                 style="@style/NormalText.Light"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -33,7 +33,7 @@ public class LoginActivityTest extends InstrumentationTestCase {
     }
 
     public void testLoginSuccessful() throws UiObjectNotFoundException {
-        UiObject loginButton = device.findObject(new UiSelector().text(getInstrumentation().getTargetContext().getString(R.string.tw__login_btn_txt)));
+        UiObject loginButton = device.findObject(new UiSelector().text("Log in with Twitter"));
         loginButton.clickAndWaitForNewWindow(TIMEOUT);
 
         UiObject allowButton = device.findObject(new UiSelector().text("Allow"));
@@ -45,13 +45,13 @@ public class LoginActivityTest extends InstrumentationTestCase {
     }
 
     public void testLoginCancelled() throws UiObjectNotFoundException {
-        UiObject loginButton = device.findObject(new UiSelector().text(getInstrumentation().getTargetContext().getString(R.string.tw__login_btn_txt)));
+        UiObject loginButton = device.findObject(new UiSelector().text("Log in with Twitter"));
         loginButton.clickAndWaitForNewWindow(TIMEOUT);
 
         UiObject allowButton = device.findObject(new UiSelector().text("Cancel"));
         allowButton.clickAndWaitForNewWindow(TIMEOUT);
 
-        loginButton = device.findObject(new UiSelector().text(getInstrumentation().getTargetContext().getString(R.string.tw__login_btn_txt)));
+        loginButton = device.findObject(new UiSelector().text("Log in with Twitter"));
         assertNotNull(loginButton);
     }
 }

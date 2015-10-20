@@ -94,7 +94,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
 
     private void showNewTweetDialog() {
         final EditText tweetText = new EditText(this);
-        tweetText.setId(R.id.tw__tweet_text);
+        tweetText.setId(R.id.tweet_text);
         tweetText.setSingleLine();
         tweetText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
         tweetText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(140)});

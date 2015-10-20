@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">Twittererer</string>
-    <string name="error_login_failed">Login failed. Please try again!</string>
-    <string name="title_activity_twitter_feed">My Twittererer Feed</string>
-    <string name="label_welcome_message">Welcome to Twittererer!</string>
-    <string name="label_tag_line">Please log in with your Twitter account</string>
-    <string name="label_send_tweet">Send tweet</string>
-    <string name="label_what_is_happening">What\'s happening?</string>
-    <string name="label_no_tweets">No Tweets yet? Tweet, tweet, tweet!</string>
-    <string name="content_description_avatar">avatar image</string>
     <string name="action_tweet">Tweet</string>
-    <string name="alert_tweet_successful">Great Success!</string>
+    <string name="content_description_avatar">avatar image</string>
+    <string name="label_no_tweets">No Tweets yet? Tweet, tweet, tweet!</string>
+    <string name="label_send_tweet">Send tweet</string>
+    <string name="label_tag_line">Please log in with your Twitter account</string>
     <string name="alert_tweet_failed">Sending tweet failed… :(</string>
+    <string name="alert_tweet_successful">Great Success!</string>
+    <string name="label_welcome_message">Welcome to Twittererer!</string>
+    <string name="label_what_is_happening">What\'s happening?</string>
+    <string name="title_activity_twitter_feed">My Twittererer Feed</string>
 </resources>

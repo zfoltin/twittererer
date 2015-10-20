@@ -129,7 +129,7 @@ public class TimelineActivityTest {
                 .perform(click());
 
         String tweetText = "My latest unique tweet with #" + System.currentTimeMillis();
-        onView(withId(R.id.tw__tweet_text))
+        onView(withId(R.id.tweet_text))
                 .perform(typeText(tweetText), pressImeActionButton());
 
         onView(withText(tweetText))

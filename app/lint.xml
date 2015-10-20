@@ -1,0 +1,4 @@
+<issue id="InvalidPackage">
+    <ignore regexp="okio-1.6.0.jar" />
+    <ignore regexp="lombok-1.16.6.jar" />
+</issue>
