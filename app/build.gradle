@@ -8,7 +8,7 @@ android {
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-        applicationId "com.crowdmix.twittererer"
+        applicationId "com.zedeff.twittererer"
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1

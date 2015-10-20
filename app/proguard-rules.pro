@@ -19,7 +19,7 @@
 -include ../proguard-com.twitter.sdk.android.twitter.txt
 
 # model classes
--keep class com.crowdmix.twittererer.models.** { *; }
+-keep class com.zedeff.twittererer.models.** { *; }
 
 # butterknife
 -keep class butterknife.** { *; }
