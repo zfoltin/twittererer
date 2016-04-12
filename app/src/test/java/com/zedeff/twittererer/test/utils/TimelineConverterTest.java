@@ -116,4 +116,16 @@ public class TimelineConverterTest {
 
         assertThat(results.get(0).getCreatedAt(), is(equalTo("4d")));
     }
+
+    @Test
+    public void fromTweetsMapAgeWithZeroHours() {
+        String createdAt = "Tue Dec 15 00:53:04 +0000 2015";
+        DateTime fewMinutesAfter = new DateTime(2015, 12, 15, 0, 57, 14);
+        List<Tweet> tweets = new ArrayList<>();
+        tweets.add(createTweet(createdAt, null, null, null, null));
+
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, fewMinutesAfter);
+
+        assertThat(results.get(0).getCreatedAt(), is(equalTo("4m")));
+    }
 }

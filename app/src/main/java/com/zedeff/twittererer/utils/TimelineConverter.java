@@ -17,7 +17,7 @@ import java.util.List;
 
 public class TimelineConverter {
 
-    public static final String DATE_TIME_FORMAT = "EEE MMM dd kk:mm:ss Z yyyy";
+    public static final String DATE_TIME_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
 
     public static List<TimelineItem> fromTweets(List<Tweet> tweets, DateTime now) {
         List<TimelineItem> timelineItems = new ArrayList<>();
