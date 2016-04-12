@@ -92,7 +92,7 @@ public class TwitterServiceImpl extends TwitterApiClient implements TwitterServi
                 }
             };
 
-            getStatusesService().update(tweetText, null, null, null, null, null, null, null, callback);
+            getStatusesService().update(tweetText, null, null, null, null, null, null, null, null, callback);
         });
     }
 }

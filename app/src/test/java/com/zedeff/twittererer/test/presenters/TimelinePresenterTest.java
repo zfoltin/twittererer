@@ -1,8 +1,9 @@
-package com.zedeff.twittererer.presenters;
+package com.zedeff.twittererer.test.presenters;
 
 import com.zedeff.twittererer.R;
 import com.zedeff.twittererer.models.TimelineItem;
 import com.zedeff.twittererer.models.User;
+import com.zedeff.twittererer.presenters.TimelinePresenter;
 import com.zedeff.twittererer.services.TwitterService;
 import com.zedeff.twittererer.views.TimelineView;
 

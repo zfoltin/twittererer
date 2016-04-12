@@ -5,7 +5,7 @@ apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.3"
 
     defaultConfig {
         applicationId "com.zedeff.twittererer"
@@ -38,10 +38,11 @@ gradle.projectsEvaluated {
 
 dependencies {
     provided 'javax.annotation:jsr250-api:1.0'
-    provided 'org.projectlombok:lombok:1.16.6'
-    apt 'org.projectlombok:lombok:1.16.6'
-    apt 'com.google.dagger:dagger-compiler:2.0.1'
-    androidTestApt 'com.google.dagger:dagger-compiler:2.0.1'
+    provided 'org.projectlombok:lombok:1.16.8'
+    apt 'org.projectlombok:lombok:1.16.8'
+    // cannot use dagger 2.3 just yet https://code.google.com/p/android/issues/detail?id=206407
+    apt 'com.google.dagger:dagger-compiler:2.2'
+    androidTestApt 'com.google.dagger:dagger-compiler:2.2'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
@@ -51,35 +52,33 @@ dependencies {
     androidTestCompile 'org.mockito:mockito-core:1.10.19'
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
-    androidTestCompile 'com.android.support.test:runner:0.4'
-    androidTestCompile 'com.android.support.test:rules:0.4'
+    androidTestCompile 'com.android.support.test:runner:0.5'
+    androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
-    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2') {
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude module: 'recyclerview-v7'
-    }
+    androidTestCompile ('com.android.support.test.espresso:espresso-contrib:2.2.2')
 
-    compile 'com.android.support:appcompat-v7:23.1.0'
-    compile 'com.android.support:recyclerview-v7:23.1.0'
-    compile 'com.android.support:support-v4:23.1.0'
-    compile 'com.google.dagger:dagger:2.0.1'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+
+    compile 'com.google.dagger:dagger:2.2'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'net.danlew:android.joda:2.8.2'
-    compile 'io.reactivex:rxjava:1.0.14'
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile('com.crashlytics.sdk.android:crashlytics:2.5.2@aar') {
+    compile 'net.danlew:android.joda:2.9.3'
+    compile 'io.reactivex:rxjava:1.1.3'
+    compile 'io.reactivex:rxandroid:1.1.0'
+    compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
-    compile('com.twitter.sdk.android:twitter:1.8.0@aar') {
+    compile('com.twitter.sdk.android:twitter:1.13.0@aar') {
         transitive = true;
     }
 }
 
 configurations.all {
-    // Currently espresso 2.2 is dependent on support-annotations:22.2.0
-    resolutionStrategy.force 'com.android.support:support-annotations:23.1.0'
+    // Currently espresso 2.2.2 is dependent on 23.1.1
+    resolutionStrategy {
+        force 'com.android.support:design:23.3.0'
+    }
 }

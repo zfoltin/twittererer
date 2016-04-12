@@ -1,9 +1,10 @@
-package com.zedeff.twittererer.utils;
+package com.zedeff.twittererer.test.utils;
 
-import com.zedeff.twittererer.BuildConfig;
-import com.zedeff.twittererer.models.TimelineItem;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
+import com.zedeff.twittererer.BuildConfig;
+import com.zedeff.twittererer.models.TimelineItem;
+import com.zedeff.twittererer.utils.TimelineConverter;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -33,7 +34,7 @@ public class TimelineConverterTest {
 
     private Tweet createTweet(String createdAt, String text, String name, String screenName, String profileImageUrl) {
         User user = new User(false, null, false, false, null, null, null, 0, false, 0, 0, false, 0, null, false, null, 0, null, name, null, null, null, false, null, profileImageUrl, null, null, null, null, null, false, false, screenName, false, null, 0, null, null, 0, false, null, null);
-        return new Tweet(null, createdAt, null, null, null, false, null, 0, null, null, 0, null, 0, null, null, null, false, null, 0, false, null, null, text, false, user, false, null, null);
+        return new Tweet(null, createdAt, null, null, null, 0, false, null, 0, null, null, 0, null, 0, null, null, null, false, null, 0, false, null, null, text, false, user, false, null, null);
     }
 
     @Before
