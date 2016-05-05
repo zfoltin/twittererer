@@ -15,9 +15,11 @@ import org.joda.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimelineConverter {
+public final class TimelineConverter {
 
     public static final String DATE_TIME_FORMAT = "EEE MMM dd HH:mm:ss Z yyyy";
+
+    private TimelineConverter() {}
 
     public static List<TimelineItem> fromTweets(List<Tweet> tweets, DateTime now) {
         List<TimelineItem> timelineItems = new ArrayList<>();
