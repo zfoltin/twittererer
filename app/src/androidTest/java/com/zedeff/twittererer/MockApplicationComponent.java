@@ -6,5 +6,5 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {MockApplicationModule.class})
-public interface MockApplicationComponent extends App.BaseApplicationComponent {
+interface MockApplicationComponent extends App.BaseApplicationComponent {
 }

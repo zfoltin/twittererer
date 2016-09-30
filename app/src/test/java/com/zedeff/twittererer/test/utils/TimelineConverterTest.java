@@ -14,7 +14,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.robolectric.RobolectricGradleTestRunner;
+import org.robolectric.RobolectricTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
 
@@ -26,15 +26,15 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
-@RunWith(RobolectricGradleTestRunner.class)
-@Config(constants = BuildConfig.class, sdk = 21)
+@RunWith(RobolectricTestRunner.class)
+@Config(constants = BuildConfig.class, sdk = 23)
 public class TimelineConverterTest {
 
     private DateTimeFormatter dtf = DateTimeFormat.forPattern(TimelineConverter.DATE_TIME_FORMAT);
 
     private Tweet createTweet(String createdAt, String text, String name, String screenName, String profileImageUrl) {
         User user = new User(false, null, false, false, null, null, null, 0, false, 0, 0, false, 0, null, false, null, 0, null, name, null, null, null, false, null, profileImageUrl, null, null, null, null, null, false, false, screenName, false, null, 0, null, null, 0, false, null, null);
-        return new Tweet(null, createdAt, null, null, null, 0, false, null, 0, null, null, 0, null, 0, null, null, null, false, null, 0, false, null, null, text, false, user, false, null, null);
+        return new Tweet(null, createdAt, null, null, null, 0, false, null, 0, null, null, 0, null, 0, null, null, null, false, null, 0, null, null, 0, false, null, null, text, null, false, user, false, null, null, null);
     }
 
     @Before
@@ -127,5 +127,17 @@ public class TimelineConverterTest {
         List<TimelineItem> results = TimelineConverter.fromTweets(tweets, fewMinutesAfter);
 
         assertThat(results.get(0).getCreatedAt(), is(equalTo("4m")));
+    }
+
+    @Test
+    public void invalidDateDoesNotThrow() {
+        String createdAt = "XXX Sep 12 11:13:04 +0000 2016";
+        DateTime fewMinutesAfter = new DateTime(2016, 9, 12, 11, 15, 14);
+        List<Tweet> tweets = new ArrayList<>();
+        tweets.add(createTweet(createdAt, null, null, null, null));
+
+        List<TimelineItem> results = TimelineConverter.fromTweets(tweets, fewMinutesAfter);
+
+        assertThat(results.get(0).getCreatedAt(), is(equalTo("")));
     }
 }

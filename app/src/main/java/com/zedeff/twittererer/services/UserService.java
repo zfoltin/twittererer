@@ -1,13 +1,13 @@
 package com.zedeff.twittererer.services;
 
-import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.models.User;
 
-import retrofit.http.GET;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
-public interface UserService {
+interface UserService {
 
     @GET("/1.1/users/show.json")
-    void show(@Query("user_id") long id, Callback<User> cb);
+    Call<User> show(@Query("user_id") long id);
 }

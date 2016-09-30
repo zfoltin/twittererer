@@ -2,16 +2,16 @@ package com.zedeff.twittererer.services;
 
 import android.util.Log;
 
-import com.zedeff.twittererer.models.TimelineItem;
-import com.zedeff.twittererer.utils.TimelineConverter;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Session;
 import com.twitter.sdk.android.core.TwitterApiClient;
 import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.core.models.User;
+import com.zedeff.twittererer.models.TimelineItem;
+import com.zedeff.twittererer.utils.TimelineConverter;
 
 import org.joda.time.DateTime;
 
@@ -32,7 +32,7 @@ public class TwitterServiceImpl extends TwitterApiClient implements TwitterServi
     @Setter
     private com.zedeff.twittererer.models.User currentUser;
 
-    public TwitterServiceImpl(Session session) {
+    public TwitterServiceImpl(TwitterSession session) {
         super(session);
     }
 
@@ -52,7 +52,7 @@ public class TwitterServiceImpl extends TwitterApiClient implements TwitterServi
                 }
             };
 
-            getStatusesService().homeTimeline(null, null, null, null, null, null, null, callback);
+            getStatusesService().homeTimeline(null, null, null, null, null, null, null).enqueue(callback);
         });
     }
 
@@ -72,7 +72,7 @@ public class TwitterServiceImpl extends TwitterApiClient implements TwitterServi
                 }
             };
 
-            getService(UserService.class).show(Twitter.getSessionManager().getActiveSession().getUserId(), callback);
+            getService(UserService.class).show(Twitter.getSessionManager().getActiveSession().getUserId()).enqueue(callback);
         });
     }
 
@@ -92,7 +92,7 @@ public class TwitterServiceImpl extends TwitterApiClient implements TwitterServi
                 }
             };
 
-            getStatusesService().update(tweetText, null, null, null, null, null, null, null, null, callback);
+            getStatusesService().update(tweetText, null, null, null, null, null, null, null, null).enqueue(callback);
         });
     }
 }

@@ -6,7 +6,7 @@ import dagger.Component;
 
 @PerActivity
 @Component(dependencies = App.BaseApplicationComponent.class)
-public interface ActivityComponent {
+interface ActivityComponent {
 
     void inject(TimelineActivity activity);
 }

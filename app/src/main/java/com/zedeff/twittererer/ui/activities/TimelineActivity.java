@@ -30,7 +30,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TimelineActivity extends AppCompatActivity implements TimelineView {
@@ -38,11 +38,11 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
     @Inject
     TimelinePresenter presenter;
 
-    @Bind(R.id.swipe_refresh)
+    @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
-    @Bind(R.id.tweets)
+    @BindView(R.id.tweets)
     RecyclerView tweetList;
-    @Bind(R.id.no_tweets)
+    @BindView(R.id.no_tweets)
     TextView noTweetsView;
 
     TimelineAdapter adapter;
@@ -102,9 +102,7 @@ public class TimelineActivity extends AppCompatActivity implements TimelineView 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.label_what_is_happening);
-        builder.setPositiveButton(R.string.action_tweet, (dialog, which) -> {
-            presenter.tweet(tweetText.getText().toString());
-        });
+        builder.setPositiveButton(R.string.action_tweet, (dialog, which) -> presenter.tweet(tweetText.getText().toString()));
 
         AlertDialog alert = builder.create();
         alert.setView(tweetText, 64, 0, 64, 0);

@@ -37,9 +37,9 @@ public class TimelinePresenterTest {
     @Captor
     ArgumentCaptor<List<TimelineItem>> timelineItemsCaptor;
 
-    TimelinePresenter presenter;
-    User user;
-    List<TimelineItem> timelineItems;
+    private TimelinePresenter presenter;
+    private User user;
+    private List<TimelineItem> timelineItems;
 
     @Before
     public void setUp() {

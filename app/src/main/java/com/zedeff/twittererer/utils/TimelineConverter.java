@@ -36,16 +36,20 @@ public final class TimelineConverter {
         }
 
         DateTimeFormatter dtf = DateTimeFormat.forPattern(DATE_TIME_FORMAT);
-        DateTime created = dtf.parseDateTime(createdAt);
+        try {
+            DateTime created = dtf.parseDateTime(createdAt);
 
-        if (Seconds.secondsBetween(created, now).getSeconds() < 60) {
-            return Seconds.secondsBetween(created, now).getSeconds() + "s";
-        } else if (Minutes.minutesBetween(created, now).getMinutes() < 60) {
-            return Minutes.minutesBetween(created, now).getMinutes() + "m";
-        } else if (Hours.hoursBetween(created, now).getHours() < 24) {
-            return Hours.hoursBetween(created, now).getHours() + "h";
-        } else {
-            return Days.daysBetween(created, now).getDays() + "d";
+            if (Seconds.secondsBetween(created, now).getSeconds() < 60) {
+                return Seconds.secondsBetween(created, now).getSeconds() + "s";
+            } else if (Minutes.minutesBetween(created, now).getMinutes() < 60) {
+                return Minutes.minutesBetween(created, now).getMinutes() + "m";
+            } else if (Hours.hoursBetween(created, now).getHours() < 24) {
+                return Hours.hoursBetween(created, now).getHours() + "h";
+            } else {
+                return Days.daysBetween(created, now).getDays() + "d";
+            }
+        } catch (IllegalArgumentException e) {
+            return "";
         }
     }
 }

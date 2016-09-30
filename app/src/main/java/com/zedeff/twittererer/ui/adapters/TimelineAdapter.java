@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHolder> {
@@ -43,7 +43,12 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         viewHolder.nameView.setText(timelineItem.getUser().getName());
         viewHolder.handleView.setText(String.format("@%s", timelineItem.getUser().getScreenName()));
         viewHolder.timeView.setText(timelineItem.getCreatedAt());
-        viewHolder.textView.setText(Html.fromHtml(timelineItem.getText()));
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            viewHolder.textView.setText(Html.fromHtml(timelineItem.getText(), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            //noinspection deprecation
+            viewHolder.textView.setText(Html.fromHtml(timelineItem.getText()));
+        }
     }
 
     @Override
@@ -51,20 +56,20 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.ViewHo
         return timelineItems != null ? timelineItems.size() : 0;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.avatar)
+        @BindView(R.id.avatar)
         ImageView avatarImageView;
-        @Bind(R.id.name)
+        @BindView(R.id.name)
         TextView nameView;
-        @Bind(R.id.handle)
+        @BindView(R.id.handle)
         TextView handleView;
-        @Bind(R.id.tweet_time)
+        @BindView(R.id.tweet_time)
         TextView timeView;
-        @Bind(R.id.tweet_text)
+        @BindView(R.id.tweet_text)
         TextView textView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
