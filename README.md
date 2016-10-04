@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/zfoltin/twittererer.svg?style=shield&circle-token=2b82ee6012c75077447864ce2c96c9079adbbcb9)](https://circleci.com/gh/zfoltin/twittererer)
+
 # Twittererer
 
 A simplistic Android Twitter client demonstrating the use of the MVP pattern, unit tests with pure JUnit4 and Robolectric, UI testing using UI Automator and Espresso, usage of various libraries such as Dagger 2, RxJava, Retrofit, Twitter SDK, RecyclerView, Butter Knife, Picasso, Joda-Time, etc
