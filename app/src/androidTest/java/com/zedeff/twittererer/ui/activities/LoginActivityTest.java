@@ -33,6 +33,10 @@ import static org.junit.Assert.assertThat;
  * Make sure the test device has the official Twitter app installed
  * Register a Twitter test user so we can log in with that user
  *
+ * Also works in an emulator with an ARM CPU (max API 23 for now, see below)
+ * Install the Twitter app from: http://www.androiddrawer.com/25966/download-twitter-2-app-apk/
+ * Note: the above Twitter app apk (6.16.0) does not work with x86 CPU based emulator images
+ *
  * Note: make sure all accessibility services are turned off (e.g.: LastPass) otherwise you get this
  * http://stackoverflow.com/questions/27132799/java-lang-securityexception-permission-denial-getintentsender-when-using-uia
  */
@@ -42,6 +46,7 @@ public class LoginActivityTest {
 
     private static final String APP_PACKAGE = "com.zedeff.twittererer";
     private static final int TIMEOUT = 5000;
+    private static final String LOGIN_BUTTON_TEXT = "Log in with Twitter";
 
     private UiDevice device;
 
@@ -69,9 +74,10 @@ public class LoginActivityTest {
 
     @Test
     public void loginSuccessful() throws UiObjectNotFoundException {
-        UiObject loginButton = device.findObject(new UiSelector().text("Log in with Twitter"));
+        UiObject loginButton = device.findObject(new UiSelector().text(LOGIN_BUTTON_TEXT));
         loginButton.clickAndWaitForNewWindow(TIMEOUT);
 
+        // TODO: this fails to find the text on API 24+ (Android 7+) for some reason
         UiObject allowButton = device.findObject(new UiSelector().text("Allow"));
         allowButton.clickAndWaitForNewWindow(TIMEOUT);
 
@@ -82,13 +88,14 @@ public class LoginActivityTest {
 
     @Test
     public void loginCancelled() throws UiObjectNotFoundException {
-        UiObject loginButton = device.findObject(new UiSelector().text("Log in with Twitter"));
+        UiObject loginButton = device.findObject(new UiSelector().text(LOGIN_BUTTON_TEXT));
         loginButton.clickAndWaitForNewWindow(TIMEOUT);
 
+        // TODO: this fails to find the text on API 24+ (Android 7+) for some reason
         UiObject allowButton = device.findObject(new UiSelector().text("Cancel"));
         allowButton.clickAndWaitForNewWindow(TIMEOUT);
 
-        loginButton = device.findObject(new UiSelector().text("Log in with Twitter"));
+        loginButton = device.findObject(new UiSelector().text(LOGIN_BUTTON_TEXT));
         assertThat(loginButton, notNullValue());
     }
 
