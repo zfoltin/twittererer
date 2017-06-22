@@ -2,16 +2,16 @@ package com.zedeff.twittererer;
 
 import android.app.Application;
 
+import com.twitter.sdk.android.core.TwitterCore;
 import com.zedeff.twittererer.services.TwitterService;
 import com.zedeff.twittererer.services.TwitterServiceImpl;
-import com.twitter.sdk.android.Twitter;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 @Module
 class ApplicationModule {
@@ -31,7 +31,7 @@ class ApplicationModule {
     @Provides
     @Singleton
     TwitterService provideTwitterService() {
-        return new TwitterServiceImpl(Twitter.getSessionManager().getActiveSession());
+        return new TwitterServiceImpl(TwitterCore.getInstance().getSessionManager().getActiveSession());
     }
 
     @Provides

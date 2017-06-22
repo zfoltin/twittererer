@@ -2,10 +2,10 @@ package com.zedeff.twittererer.services;
 
 import android.util.Log;
 
-import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.Callback;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterApiClient;
+import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.models.Tweet;
@@ -19,9 +19,9 @@ import java.util.List;
 
 import javax.inject.Singleton;
 
+import io.reactivex.Observable;
 import lombok.Getter;
 import lombok.Setter;
-import rx.Observable;
 
 @Singleton
 public class TwitterServiceImpl extends TwitterApiClient implements TwitterService {
@@ -72,7 +72,7 @@ public class TwitterServiceImpl extends TwitterApiClient implements TwitterServi
                 }
             };
 
-            getService(UserService.class).show(Twitter.getSessionManager().getActiveSession().getUserId()).enqueue(callback);
+            getService(UserService.class).show(TwitterCore.getInstance().getSessionManager().getActiveSession().getUserId()).enqueue(callback);
         });
     }
 

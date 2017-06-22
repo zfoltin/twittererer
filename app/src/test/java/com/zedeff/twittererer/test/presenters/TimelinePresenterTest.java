@@ -17,8 +17,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.schedulers.Schedulers;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
@@ -45,7 +45,7 @@ public class TimelinePresenterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
 
-        presenter = new TimelinePresenter(twitterService, Schedulers.immediate());
+        presenter = new TimelinePresenter(twitterService, Schedulers.trampoline());
 
         user = new User("Bob", "bob", "");
         timelineItems = new ArrayList<>();

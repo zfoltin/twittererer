@@ -4,9 +4,10 @@ import android.app.Application;
 import android.support.annotation.VisibleForTesting;
 
 import com.crashlytics.android.Crashlytics;
-import com.zedeff.twittererer.services.TwitterService;
-import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.zedeff.twittererer.services.TwitterService;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -14,7 +15,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import io.fabric.sdk.android.Fabric;
-import rx.Scheduler;
+import io.reactivex.Scheduler;
 
 public class App extends Application {
 
@@ -36,8 +37,8 @@ public class App extends Application {
 
         JodaTimeAndroid.init(this);
 
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Crashlytics(), new Twitter(authConfig));
+        Fabric.with(this, new Crashlytics());
+        Twitter.initialize(new TwitterConfig.Builder(this).twitterAuthConfig(new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET)).build());
 
         applicationComponent = DaggerApp_ApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
@@ -51,7 +52,7 @@ public class App extends Application {
 
     @Singleton
     @Component(modules = {ApplicationModule.class})
-    public interface ApplicationComponent extends BaseApplicationComponent {
+    interface ApplicationComponent extends BaseApplicationComponent {
     }
 
     public interface BaseApplicationComponent {

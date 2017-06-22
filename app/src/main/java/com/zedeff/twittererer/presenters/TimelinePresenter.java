@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import rx.Scheduler;
+import io.reactivex.Scheduler;
 
 public class TimelinePresenter {
 
